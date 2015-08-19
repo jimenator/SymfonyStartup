@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table id="telefonTabe">
+            <tr>
+                <th>Nombre</th>
+                <th>Número</th>
+            </tr>
+        {% for numberRow in telefonNumbers %}
+            <tr>
+                <td>{{ numberRow['name'] }}</td>
+                <td>{{ numberRow['telefonNumber'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
