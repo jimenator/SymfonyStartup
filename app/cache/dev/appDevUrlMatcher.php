@@ -133,7 +133,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->redirect($pathinfo.'/', 'app');
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\AgendaController::indexAction',  '_route' => 'app',);
+            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'app',);
+        }
+
+        // agenda
+        if (preg_match('#^/(?P<_locale>es|en)/Agenda$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'agenda')), array (  '_controller' => 'AppBundle\\Controller\\AgendaController::indexAction',));
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

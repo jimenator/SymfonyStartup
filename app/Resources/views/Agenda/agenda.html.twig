@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table id="telefonTabe">
+    <table id="telephoneTable">
             <tr>
-                <th>Nombre</th>
-                <th>Número</th>
+                <th>{{ 'Agenda.name' | trans | capitalize }}</th>
+                <th>{{ 'Agenda.telephone' | trans | capitalize }}</th>
             </tr>
         {% for numberRow in telefonNumbers %}
             <tr>

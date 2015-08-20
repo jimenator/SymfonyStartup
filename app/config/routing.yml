@@ -1,3 +1,9 @@
 app:
     path: /
+    defaults: {_controller: AppBundle:Welcome:index}
+
+agenda:
+    path: /{_locale}/Agenda
     defaults: {_controller: AppBundle:Agenda:index}
+    requirements:
+        _locale: es|en

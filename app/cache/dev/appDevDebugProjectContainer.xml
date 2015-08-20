@@ -89,7 +89,7 @@
     <parameter key="kernel.http_method_override">true</parameter>
     <parameter key="kernel.trusted_hosts" type="collection"/>
     <parameter key="kernel.trusted_proxies" type="collection"/>
-    <parameter key="kernel.default_locale">en</parameter>
+    <parameter key="kernel.default_locale">es</parameter>
     <parameter key="session.class">Symfony\Component\HttpFoundation\Session\Session</parameter>
     <parameter key="session.flashbag.class">Symfony\Component\HttpFoundation\Session\Flash\FlashBag</parameter>
     <parameter key="session.attribute_bag.class">Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag</parameter>
@@ -145,6 +145,7 @@
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="validator.api">2.5-bc</parameter>
     <parameter key="fragment.listener.class">Symfony\Component\HttpKernel\EventListener\FragmentListener</parameter>
+    <parameter key="translator.logging">true</parameter>
     <parameter key="profiler.class">Symfony\Component\HttpKernel\Profiler\Profiler</parameter>
     <parameter key="profiler_listener.class">Symfony\Component\HttpKernel\EventListener\ProfilerListener</parameter>
     <parameter key="data_collector.config.class">Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector</parameter>
@@ -590,6 +591,10 @@
         <parameter>form</parameter>
         <parameter>@WebProfiler/Collector/form.html.twig</parameter>
       </parameter>
+      <parameter key="data_collector.translation" type="collection">
+        <parameter>translation</parameter>
+        <parameter>@WebProfiler/Collector/translation.html.twig</parameter>
+      </parameter>
       <parameter key="data_collector.twig" type="collection">
         <parameter>twig</parameter>
         <parameter>@WebProfiler/Collector/twig.html.twig</parameter>
@@ -629,7 +634,7 @@
     </service>
     <service id="locale_listener" class="Symfony\Component\HttpKernel\EventListener\LocaleListener">
       <tag name="kernel.event_subscriber"/>
-      <argument>en</argument>
+      <argument>es</argument>
       <argument type="service" id="router" on-invalid="ignore"/>
       <argument type="service" id="request_stack"/>
     </service>
@@ -670,7 +675,7 @@
         <argument type="service">
           <service class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer" public="false">
             <tag name="kernel.cache_warmer"/>
-            <argument type="service" id="translator"/>
+            <argument type="service" id="translator.default"/>
           </service>
         </argument>
         <argument type="service">
@@ -764,7 +769,9 @@
     </service>
     <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator">
       <argument type="service" id="service_container"/>
-      <argument type="service" id="translator.selector"/>
+      <argument type="service">
+        <service class="Symfony\Component\Translation\MessageSelector" public="false"/>
+      </argument>
       <argument type="collection">
         <argument key="translation.loader.php" type="collection">
           <argument>php</argument>
@@ -804,13 +811,247 @@
       <argument type="collection">
         <argument key="cache_dir">/home/jimenator/PhpstormProjects/SymfonyTestProject/app/cache/dev/translations</argument>
         <argument key="debug">true</argument>
+        <argument key="resource_files" type="collection">
+          <argument key="he" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.he.xlf</argument>
+          </argument>
+          <argument key="pt" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf</argument>
+          </argument>
+          <argument key="sr_Latn" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sr_Latn.xlf</argument>
+          </argument>
+          <argument key="id" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.id.xlf</argument>
+          </argument>
+          <argument key="sk" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sk.xlf</argument>
+          </argument>
+          <argument key="fa" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.fa.xlf</argument>
+          </argument>
+          <argument key="cy" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf</argument>
+          </argument>
+          <argument key="lb" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.lb.xlf</argument>
+          </argument>
+          <argument key="hu" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.hu.xlf</argument>
+          </argument>
+          <argument key="sv" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sv.xlf</argument>
+          </argument>
+          <argument key="en" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.en.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/app/Resources/translations/messages.en.yml</argument>
+          </argument>
+          <argument key="el" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.el.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.el.xlf</argument>
+          </argument>
+          <argument key="gl" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.gl.xlf</argument>
+          </argument>
+          <argument key="it" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.it.xlf</argument>
+          </argument>
+          <argument key="ar" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ar.xlf</argument>
+          </argument>
+          <argument key="pt_BR" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pt_BR.xlf</argument>
+          </argument>
+          <argument key="lt" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.lt.xlf</argument>
+          </argument>
+          <argument key="ca" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ca.xlf</argument>
+          </argument>
+          <argument key="hy" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf</argument>
+          </argument>
+          <argument key="es" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.es.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/app/Resources/translations/messages.es.yml</argument>
+          </argument>
+          <argument key="vi" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.vi.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.vi.xlf</argument>
+          </argument>
+          <argument key="sl" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sl.xlf</argument>
+          </argument>
+          <argument key="et" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf</argument>
+          </argument>
+          <argument key="az" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.az.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.az.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.az.xlf</argument>
+          </argument>
+          <argument key="bg" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.bg.xlf</argument>
+          </argument>
+          <argument key="ja" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ja.xlf</argument>
+          </argument>
+          <argument key="hr" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.hr.xlf</argument>
+          </argument>
+          <argument key="no" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.no.xlf</argument>
+          </argument>
+          <argument key="nb" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nb.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nb.xlf</argument>
+          </argument>
+          <argument key="tr" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.tr.xlf</argument>
+          </argument>
+          <argument key="pl" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pl.xlf</argument>
+          </argument>
+          <argument key="af" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf</argument>
+          </argument>
+          <argument key="fi" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf</argument>
+          </argument>
+          <argument key="cs" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.cs.xlf</argument>
+          </argument>
+          <argument key="sr_Cyrl" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sr_Cyrl.xlf</argument>
+          </argument>
+          <argument key="mn" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf</argument>
+          </argument>
+          <argument key="ro" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ro.xlf</argument>
+          </argument>
+          <argument key="sq" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf</argument>
+          </argument>
+          <argument key="ru" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ru.xlf</argument>
+          </argument>
+          <argument key="th" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.th.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.th.xlf</argument>
+          </argument>
+          <argument key="fr" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.fr.xlf</argument>
+          </argument>
+          <argument key="zh_TW" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_TW.xlf</argument>
+          </argument>
+          <argument key="nl" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.nl.xlf</argument>
+          </argument>
+          <argument key="da" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.da.xlf</argument>
+          </argument>
+          <argument key="de" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.de.xlf</argument>
+          </argument>
+          <argument key="uk" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.uk.xlf</argument>
+          </argument>
+          <argument key="eu" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf</argument>
+          </argument>
+          <argument key="zh_CN" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf</argument>
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.zh_CN.xlf</argument>
+          </argument>
+          <argument key="lv" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf</argument>
+          </argument>
+          <argument key="ua" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ua.xlf</argument>
+          </argument>
+          <argument key="pt_PT" type="collection">
+            <argument>/home/jimenator/PhpstormProjects/SymfonyTestProject/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pt_PT.xlf</argument>
+          </argument>
+        </argument>
       </argument>
       <argument type="collection"/>
+      <call method="setFallbackLocales">
+        <argument type="collection">
+          <argument>es</argument>
+        </argument>
+      </call>
     </service>
-    <service id="translator" class="Symfony\Component\Translation\IdentityTranslator">
-      <argument type="service" id="translator.selector"/>
-    </service>
-    <service id="translator.selector" class="Symfony\Component\Translation\MessageSelector" public="false"/>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
     </service>
@@ -1394,6 +1635,9 @@
         <argument type="service" id="data_collector.form"/>
       </call>
       <call method="add">
+        <argument type="service" id="data_collector.translation"/>
+      </call>
+      <call method="add">
         <argument type="service">
           <service class="Symfony\Bridge\Twig\DataCollector\TwigDataCollector" public="false">
             <tag name="data_collector" template="@WebProfiler/Collector/twig.html.twig" id="twig" priority="255"/>
@@ -1458,6 +1702,10 @@
     <service id="data_collector.form" class="Symfony\Component\Form\Extension\DataCollector\FormDataCollector">
       <tag name="data_collector" template="@WebProfiler/Collector/form.html.twig" id="form" priority="255"/>
       <argument type="service" id="data_collector.form.extractor"/>
+    </service>
+    <service id="data_collector.translation" class="Symfony\Component\Translation\DataCollector\TranslationDataCollector">
+      <tag name="data_collector" template="@WebProfiler/Collector/translation.html.twig" id="translation" priority="255"/>
+      <argument type="service" id="translator"/>
     </service>
     <service id="routing.loader" class="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader">
       <tag name="monolog.logger" channel="router"/>
@@ -1712,7 +1960,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>55d62163636256.20298705</argument>
+            <argument>55d62ae6b99349.71014337</argument>
           </service>
         </argument>
       </argument>
@@ -1835,7 +2083,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>55d62163636256.20298705</argument>
+            <argument>55d62ae6b99349.71014337</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2508,6 +2756,10 @@
           <argument>form</argument>
           <argument>@WebProfiler/Collector/form.html.twig</argument>
         </argument>
+        <argument key="data_collector.translation" type="collection">
+          <argument>translation</argument>
+          <argument>@WebProfiler/Collector/translation.html.twig</argument>
+        </argument>
         <argument key="data_collector.twig" type="collection">
           <argument>twig</argument>
           <argument>@WebProfiler/Collector/twig.html.twig</argument>
@@ -2710,6 +2962,15 @@
       <argument type="service" id="twig"/>
       <argument type="service" id="templating.name_parser"/>
       <argument type="service" id="templating.locator"/>
+    </service>
+    <service id="translator" class="Symfony\Component\Translation\DataCollectorTranslator">
+      <argument type="service">
+        <service class="Symfony\Component\Translation\LoggingTranslator" public="false">
+          <tag name="monolog.logger" channel="translation"/>
+          <argument type="service" id="translator.default"/>
+          <argument type="service" id="monolog.logger.translation"/>
+        </service>
+      </argument>
     </service>
     <service id="router" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
