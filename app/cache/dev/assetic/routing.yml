@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /home/jimenator/PhpstormProjects/SymfonyTestProject/app/config/routing_dev.yml

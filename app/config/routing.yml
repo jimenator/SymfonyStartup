@@ -1,6 +1,6 @@
 app:
     path: /
-    defaults: {_controller: AppBundle:Welcome:index}
+    defaults: {_controller: AppBundle:Agenda:index}
 
 agenda:
     path: /{_locale}/Agenda
